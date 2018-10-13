@@ -15,7 +15,7 @@ ansible/files/
 # .tfstate files
 *.tfstate
 *.tfstate.*
-vars.tf
+terraform.tfvars
 
 # Crash log files
 crash.log
