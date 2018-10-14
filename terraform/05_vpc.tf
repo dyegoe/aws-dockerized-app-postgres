@@ -52,12 +52,12 @@ resource "aws_subnet" "public" {
   count = "${var.vpc_subnets_count}"
   vpc_id = "${aws_vpc.main.id}"
   cidr_block = "${cidrsubnet(aws_vpc.main.cidr_block, 8, count.index)}"
-  availability_zone = "${var.region}${lookup(var.instance_subnet_id, count.index)}"
+  availability_zone = "${var.region}${lookup(var.zones, count.index)}"
   map_public_ip_on_launch = true
   tags = "${merge(
     local.common_tags,
     map(
-      "Name", "${var.project_name}-sn-pub-${lookup(var.instance_subnet_id, count.index)}"
+      "Name", "${var.project_name}-sn-pub-${lookup(var.zones, count.index)}"
     )
   )}"
 }
