@@ -19,3 +19,5 @@ terraform.tfvars
 
 # Crash log files
 crash.log
+
+*.pyc
