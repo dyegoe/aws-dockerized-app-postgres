@@ -41,6 +41,10 @@ resource "aws_lb_listener" "main" {
   }
 }
 
-output "aws_lb_dns_name" {
+output "aws_lb_main_dns_name" {
   value = "${aws_lb.main.dns_name}"
+}
+
+output "aws_lb_listener_main_id" {
+  value = "${aws_lb_listener.main.id}"
 }
