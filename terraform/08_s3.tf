@@ -2,6 +2,7 @@ data "aws_elb_service_account" "main" {}
 
 resource "aws_s3_bucket" "lb-logs" {
   bucket = "${var.project_name}-s3-lb-logs"
+  force_destroy = true
   policy = <<EOF
 {
   "Version": "2012-10-17",
