@@ -38,6 +38,7 @@ resource "aws_rds_cluster" "main" {
   vpc_security_group_ids = ["${aws_security_group.rds.id}"]
   apply_immediately = true
   db_subnet_group_name = "${aws_db_subnet_group.main.id}"
+  engine = "aurora-postgresql"
   tags = "${merge(
     local.common_tags,
     map(
