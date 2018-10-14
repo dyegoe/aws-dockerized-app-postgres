@@ -79,3 +79,11 @@ resource "aws_instance" "app" {
     create_before_destroy = true
   }
 }
+
+output "aws_instance_app_private_ip" {
+  value = ["${aws_instance.app.*.private_ip}"]
+}
+
+output "aws_instance_app_public_ip" {
+  value = ["${aws_instance.app.*.public_ip}"]
+}
