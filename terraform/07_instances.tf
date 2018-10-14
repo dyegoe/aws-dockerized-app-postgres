@@ -64,7 +64,7 @@ data "template_cloudinit_config" "user_data" {
 resource "aws_instance" "app1" {
   ami = "${lookup(var.amis, var.region)}"
   instance_type = "${var.instance_type}"
-  subnet_id = "${aws_subnet.public.a.id}"
+  subnet_id = "${aws_subnet.public-a.id}"
   key_name = "${aws_key_pair.default.id}"
   vpc_security_group_ids = ["${aws_security_group.ssh.id}"]
   user_data = "${data.template_cloudinit_config.user_data.rendered}"
