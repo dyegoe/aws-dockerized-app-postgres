@@ -9,17 +9,17 @@ resource "aws_db_subnet_group" "main" {
   )}"
 }
 
-resource "aws_db_instance" "default" {
+resource "aws_db_instance" "main" {
   count = "${var.db_instance_count}"
   allocated_storage = 10
   apply_immediately = false
-  availability_zones = ["${aws_subnet.public.*.availability_zone}"]
+  availability_zone = "${var.region}a"
   backup_retention_period = 5
   backup_window = "05:00-07:00"
   copy_tags_to_snapshot = true
   db_subnet_group_name = "${aws_db_subnet_group.main.id}"
   engine = "postgres"
-  engine_version = "10.4-R1"
+  engine_version = "10.4"
   identifier = "${var.project_name}-rds-${count.index}"
   instance_class = "${var.db_instance}"
   maintenance_window = "Mon:00:00-Mon:03:00"
@@ -37,4 +37,8 @@ resource "aws_db_instance" "default" {
   )}"
   username = "${var.db_user}"
   vpc_security_group_ids = ["${aws_security_group.rds.id}"]
+}
+
+output "aws_db_instance_main_endpoint" {
+  value = "${aws_db_instance.main.endpoint}"
 }
