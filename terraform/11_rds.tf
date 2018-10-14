@@ -40,5 +40,5 @@ resource "aws_db_instance" "main" {
 }
 
 output "aws_db_instance_main_endpoint" {
-  value = "${aws_db_instance.main.endpoint}"
+  value = "${aws_db_instance.main.*.endpoint}"
 }
