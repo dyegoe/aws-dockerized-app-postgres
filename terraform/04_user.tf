@@ -33,10 +33,10 @@ resource "aws_iam_user_policy" "asg_user" {
 EOF
 }
 
-output "aws_access_key_id" {
+output "aws_iam_access_key_asg_user_id" {
   value = "${aws_iam_access_key.asg_user.id}"
 }
 
-output "aws_secret_access_key" {
+output "aws_iam_access_key_asg_user_secret" {
   value = "${aws_iam_access_key.asg_user.secret}"
 }
