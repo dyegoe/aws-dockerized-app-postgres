@@ -37,38 +37,33 @@ resource "aws_route" "default" {
   gateway_id = "${aws_internet_gateway.main.id}"
 }
 
-resource "aws_subnet" "public-a" {
+variable "zones" {
+    default = {
+        "0" = "a"
+        "1" = "b"
+        "2" = "c"
+        "3" = "d"
+        "4" = "e"
+        "5" = "f"
+    }
+}
+
+resource "aws_subnet" "public" {
+  count = "${var.vpc_subnets_count}"
   vpc_id = "${aws_vpc.main.id}"
-  cidr_block = "${var.subnet1_cidr}"
-  availability_zone = "${var.region}a"
+  cidr_block = "${cidrsubnet(aws_vpc.main.cidr_block, 8, count.index)}"
+  availability_zone = "${var.region}${lookup(var.instance_subnet_id, count.index)}"
   map_public_ip_on_launch = true
   tags = "${merge(
     local.common_tags,
     map(
-      "Name", "${var.project_name}-sn-pub-1"
+      "Name", "${var.project_name}-sn-pub-${lookup(var.instance_subnet_id, count.index)}"
     )
   )}"
 }
 
-resource "aws_route_table_association" "public-a" {
-  subnet_id = "${aws_subnet.public-a.id}"
-  route_table_id = "${aws_route_table.main.id}"
-}
-
-resource "aws_subnet" "public-b" {
-  vpc_id = "${aws_vpc.main.id}"
-  cidr_block = "${var.subnet2_cidr}"
-  availability_zone = "${var.region}b"
-  map_public_ip_on_launch = true
-  tags = "${merge(
-    local.common_tags,
-    map(
-      "Name", "${var.project_name}-sn-pub-2"
-    )
-  )}"
-}
-
-resource "aws_route_table_association" "public-b" {
-  subnet_id = "${aws_subnet.public-b.id}"
+resource "aws_route_table_association" "public" {
+  count = "${var.vpc_subnets_count}"
+  subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id = "${aws_route_table.main.id}"
 }
