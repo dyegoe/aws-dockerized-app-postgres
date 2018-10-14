@@ -51,7 +51,7 @@ variable "instance_app_count" {
 }
 
 variable "db_name" {
-  default = "database"
+  default = "db_name"
 }
 
 variable "db_user" {
