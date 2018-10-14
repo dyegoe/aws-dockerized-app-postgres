@@ -46,11 +46,8 @@ variable "instance_type" {
   default = "t3.micro"
 }
 
-locals {
-  common_tags = {
-    Project = "${var.project_name}"
-    Environment = "develop"
-  }
+variable "instance_app_count" {
+  default = 1
 }
 
 variable "db_name" {
@@ -67,4 +64,11 @@ variable "db_password" {
 
 variable "db_instance" {
   default = "db.t2.small"
+}
+
+locals {
+  common_tags = {
+    Project = "${var.project_name}"
+    Environment = "develop"
+  }
 }
