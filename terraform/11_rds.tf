@@ -31,7 +31,7 @@ resource "aws_rds_cluster" "main" {
   database_name = "${var.db_name}"
   master_password = "${var.db_password}"
   master_username = "${var.db_user}"
-  skip_final_snapshot = false
+  skip_final_snapshot = true
   availability_zones = ["${aws_subnet.public.*.availability_zone}"]
   backup_retention_period = 5
   preferred_backup_window = "07:00-09:00"
