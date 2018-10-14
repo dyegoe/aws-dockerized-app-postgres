@@ -52,6 +52,6 @@ variable "instance_type" {
 locals {
   common_tags = {
     Project = "${var.project_name}"
-    Environment = "production"
+    Environment = "develop"
   }
 }
