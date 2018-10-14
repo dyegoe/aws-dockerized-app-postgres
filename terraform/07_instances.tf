@@ -61,17 +61,18 @@ data "template_cloudinit_config" "user_data" {
   }
 }
 
-resource "aws_instance" "app1" {
+resource "aws_instance" "app" {
+  count = "${var.instance_app_count}"
   ami = "${lookup(var.amis, var.region)}"
   instance_type = "${var.instance_type}"
-  subnet_id = "${aws_subnet.public-a.id}"
+  subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
   key_name = "${aws_key_pair.default.id}"
   vpc_security_group_ids = ["${aws_security_group.ssh.id}"]
   user_data = "${data.template_cloudinit_config.user_data.rendered}"
   tags = "${merge(
     local.common_tags,
     map(
-      "Name", "${var.project_name}-lt"
+      "Name", "${var.project_name}-app-${count.index}"
     )
   )}"
   lifecycle {
