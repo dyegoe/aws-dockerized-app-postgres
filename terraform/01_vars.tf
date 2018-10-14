@@ -16,13 +16,10 @@ variable "vpc_cidr" {
   default = "10.10.0.0/16"
 }
 
-variable "subnet1_cidr" {
-  default = "10.10.1.0/24"
+variable "vpc_subnets_count" {
+  default = 2
 }
 
-variable "subnet2_cidr" {
-  default = "10.10.2.0/24"
-}
 
 variable "amis" {
   type = "map"
@@ -54,4 +51,20 @@ locals {
     Project = "${var.project_name}"
     Environment = "develop"
   }
+}
+
+variable "db_name" {
+  default = "database"
+}
+
+variable "db_user" {
+  default = "db_user"
+}
+
+variable "db_password" {
+  default = "db_password"
+}
+
+variable "db_instance" {
+  default = "db.t2.small"
 }
