@@ -66,6 +66,11 @@ variable "db_instance" {
   default = "db.t2.small"
 }
 
+variable "db_instance_count" {
+  default = 1
+}
+
+
 locals {
   common_tags = {
     Project = "${var.project_name}"
