@@ -1,0 +1,36 @@
+---
+- name: "Execute terraform to create infrastructure"
+  terraform:
+    project_path: "{{ playbook_dir | dirname }}/terraform/"
+    state: "present"
+    variables:
+      aws_access_key_id: "{{ aws_access_key_id }}"
+      aws_secret_access_key: "{{ aws_secret_access_key }}"
+      region: "{{ region }}"
+      public_key: "{{ playbook_dir }}/files/id_rsa.pub"
+      project_name: "{{ project_name }}"
+      vpc_cidr: "{{ vpc_cidr }}"
+      vpc_subnets_count: "{{ vpc_subnets_count }}"
+      instance_type: "{{ instance_type }}"
+      instance_app_count: "{{ instance_app_count }}"
+      db_name: "{{ db_name }}"
+      db_user: "{{ db_user }}"
+      db_password: "{{ db_password }}"
+      db_instance: "{{ db_instance }}"
+      db_instance_count: "{{ db_instance_count }}"
+    force_init: true
+  register: terraform_output
+
+- debug:
+    var: terraform_output
+
+# - name: "Add EC2 instances to the inventory in runtime"
+#   add_host:
+#     hostname: "{{ item['hostname'] }}"
+#     groups: "{{ item['groups'] }}"
+#     private_ip: "{{ item['private_ip'] }}"
+#     vpc_default_network_acl_id: "{{ terraform_output['outputs']['vpc-default-network-acl-id']['value'] }}"
+#   with_items:
+#     - { hostname: "{{ terraform_output['outputs']['app-public-ip']['value'] }}", private_ip: "{{ terraform_output['outputs']['app-private-ip']['value'] }}", groups: "app" }
+#     - { hostname: "{{ terraform_output['outputs']['db-master-public-ip']['value'] }}", private_ip: "{{ terraform_output['outputs']['db-master-private-ip']['value'] }}", groups: "db-master" }
+#     - { hostname: "{{ terraform_output['outputs']['db-slave-public-ip']['value'] }}", private_ip: "{{ terraform_output['outputs']['db-slave-private-ip']['value'] }}", groups: "db-slave" }
