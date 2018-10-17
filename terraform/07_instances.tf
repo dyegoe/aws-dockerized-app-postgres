@@ -30,6 +30,7 @@ repo_upgrade: all
 packages:
   - docker
   - aws-cli
+  - python-docker
 
 write_files:
   - encoding: b64
