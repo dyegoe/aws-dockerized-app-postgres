@@ -37,6 +37,10 @@ resource "aws_db_instance" "main" {
   )}"
   username = "${var.db_user}"
   vpc_security_group_ids = ["${aws_security_group.rds.id}"]
+  timeouts {
+    create = "30m"
+    delete = "1h"
+  }
 }
 
 output "aws_db_instance_main_endpoint" {
