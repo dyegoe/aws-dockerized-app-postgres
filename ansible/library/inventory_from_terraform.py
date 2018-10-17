@@ -58,6 +58,7 @@ config.append('db_host={}'.format(outputs['aws_db_instance_main_endpoint']['valu
 config.append('db_name={}'.format(outputs['aws_db_instance_db_name']['value']))
 config.append('db_user={}'.format(outputs['aws_db_instance_db_user']['value']))
 config.append('db_password={}'.format(outputs['aws_db_instance_db_password']['value']))
+config.append('repository_url={}'.format(outputs['aws_ecr_repository_main_repository_url']['value']))
 config.append('[app]')
 
 for i in range(len(outputs['aws_instance_app_public_ip']['value'])):
