@@ -5,7 +5,7 @@
   tasks:
   - name: "Execute terraform to destroy infrastructure"
     terraform:
-      project_path: "{{ playbook_dir }}/terraform/"
+      project_path: "{{ playbook_dir | dirname }}/terraform/"
       state: "absent"
       variables:
         aws_access_key_id: "{{ aws_access_key_id }}"
