@@ -6,8 +6,16 @@ The application to deploy is a copy from [NodeJam in Flask](https://github.com/k
 
 It has some adjustments:
 
-- Source code: to use environment vars.
-- Include a Dockerfile to build the image.
+- Source code: edit `nodejam/config.py` to use environment vars.
+- Include a Dockerfile to test and build the image.
+
+### Env vars
+
+- NOTEJAM_SECRET_KEY
+- DB_USER
+- DB_PASSWORD
+- DB_HOST
+- DB_NAME
 
 ## Requirements for execution
 
