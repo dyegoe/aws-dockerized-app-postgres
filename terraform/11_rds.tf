@@ -42,3 +42,15 @@ resource "aws_db_instance" "main" {
 output "aws_db_instance_main_endpoint" {
   value = "${aws_db_instance.main.*.endpoint}"
 }
+
+output "aws_db_instance_db_name" {
+  value = "${var.db_name}"
+}
+
+output "aws_db_instance_db_user" {
+  value = "${var.db_user}"
+}
+
+output "aws_db_instance_db_password" {
+  value = "${var.db_password}"
+}
