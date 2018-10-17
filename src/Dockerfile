@@ -1,6 +1,6 @@
 FROM python:2.7-alpine3.8
 
-COPY src /app
+COPY . /app
 
 RUN apk --update add --no-cache postgresql postgresql-dev && \
     apk --update add --no-cache --virtual build-dependencies \
