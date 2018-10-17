@@ -1,5 +1,14 @@
 # Project
 
+## Application
+
+The application to deploy is a copy from [NodeJam in Flask](https://github.com/komarserjio/notejam/tree/master/flask) and its source code is under `src/`.
+
+It has some adjustments:
+
+- Source code: to use environment vars.
+- Include a Dockerfile to build the image.
+
 ## Requirements for execution
 
 This project was tested using a ubuntu 18.04 as workstation/desktop
