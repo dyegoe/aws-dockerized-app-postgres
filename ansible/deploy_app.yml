@@ -1,0 +1,5 @@
+---
+- hosts: app
+  gather_facts: yes
+  roles:
+    - build_app
