@@ -3,5 +3,5 @@ resource "aws_ecr_repository" "main" {
 }
 
 output "aws_ecr_repository_main_repository_url" {
-  value = "${aws_ecr_repository.repository_url}"
+  value = "${aws_ecr_repository.main.repository_url}"
 }
