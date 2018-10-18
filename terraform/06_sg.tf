@@ -51,7 +51,7 @@ resource "aws_security_group" "lb-ec2" {
   description = "Open access from LB to EC2 instances"
   vpc_id = "${aws_vpc.main.id}"
   ingress {
-    from_port = 5001
+    from_port = 5000
     to_port = 5999
     protocol = "TCP"
     security_groups = ["${aws_security_group.lb.id}"]
