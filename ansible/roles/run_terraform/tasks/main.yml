@@ -27,4 +27,4 @@
 - name: "Write inventory from terraform"
   inventory_from_terraform:
     outputs: "{{ terraform_output['outputs'] }}"
-    inventory_file: "{{ inventory_dir }}/deploy_inventory.cfg"
+    inventory_file: "{{ inventory_dir }}/deploy_inventory.conf"
