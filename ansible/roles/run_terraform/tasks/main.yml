@@ -6,7 +6,7 @@
     variables:
       aws_access_key_id: "{{ aws_access_key_id }}"
       aws_secret_access_key: "{{ aws_secret_access_key }}"
-      region: "{{ aws_region }}"
+      aws_region: "{{ aws_region }}"
       public_key: "{{ playbook_dir }}/files/id_rsa.pub"
       project_name: "{{ project_name }}"
       vpc_cidr: "{{ vpc_cidr }}"
