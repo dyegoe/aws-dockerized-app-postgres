@@ -69,7 +69,7 @@ resource "aws_instance" "app" {
   instance_type = "${var.instance_type}"
   subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
   key_name = "${aws_key_pair.default.id}"
-  vpc_security_group_ids = ["${aws_security_group.ssh.id}"]
+  vpc_security_group_ids = ["${aws_security_group.ssh.id}", "${aws_security_group.lb-ec2.id}"]
   user_data = "${data.template_cloudinit_config.user_data.rendered}"
   tags = "${merge(
     local.common_tags,
