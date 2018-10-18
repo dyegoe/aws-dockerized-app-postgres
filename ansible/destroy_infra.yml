@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  gather_facts: no
+  become: no
+  tasks:
+  - name: "Execute terraform to destroy infrastructure"
+    terraform:
+      project_path: "{{ playbook_dir | dirname }}/terraform/"
+      state: "absent"
+      variables:
+        aws_access_key_id: "{{ aws_access_key_id }}"
+        aws_secret_access_key: "{{ aws_secret_access_key }}"
+        aws_region: "{{ aws_region }}"
+        public_key: "{{ playbook_dir }}/files/id_rsa.pub"
+        project_name: "{{ project_name }}"
+        vpc_cidr: "{{ vpc_cidr }}"
+        vpc_subnets_count: "{{ vpc_subnets_count }}"
+        instance_type: "{{ instance_type }}"
+        instance_app_count: "{{ instance_app_count }}"
+        db_name: "{{ db_name }}"
+        db_user: "{{ db_user }}"
+        db_password: "{{ db_password }}"
+        db_instance: "{{ db_instance }}"
+        db_instance_count: "{{ db_instance_count }}"
+      force_init: yes

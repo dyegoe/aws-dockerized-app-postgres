@@ -17,7 +17,7 @@ region = $${aws_region}
 output = json
   EOF
   vars {
-    aws_region = "${var.region}"
+    aws_region = "${var.aws_region}"
   }
 }
 
@@ -47,6 +47,8 @@ runcmd:
   - chkconfig docker on
   - service docker restart
   - curl -L https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker
+  - rpm -ivh http://rpmfind.net/linux/centos/7.5.1804/os/x86_64/Packages/bash-completion-2.1-6.el7.noarch.rpm
+  - pip install docker-py
   - $(aws ecr get-login --no-include-email)
 EOF
   vars {
@@ -63,11 +65,11 @@ data "template_cloudinit_config" "user_data" {
 
 resource "aws_instance" "app" {
   count = "${var.instance_app_count}"
-  ami = "${lookup(var.amis, var.region)}"
+  ami = "${lookup(var.amis, var.aws_region)}"
   instance_type = "${var.instance_type}"
   subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
   key_name = "${aws_key_pair.default.id}"
-  vpc_security_group_ids = ["${aws_security_group.ssh.id}"]
+  vpc_security_group_ids = ["${aws_security_group.ssh.id}", "${aws_security_group.lb-ec2.id}"]
   user_data = "${data.template_cloudinit_config.user_data.rendered}"
   tags = "${merge(
     local.common_tags,

@@ -2,19 +2,13 @@ variable "aws_access_key_id" {}
 
 variable "aws_secret_access_key" {}
 
-variable "region" {
-  default = "eu-west-1"
-}
+variable "aws_region" {}
 
 variable "public_key" {}
 
-variable "project_name" {
-  default = "aws-sg-docker"
-}
+variable "project_name" {}
 
-variable "vpc_cidr" {
-  default = "10.10.0.0/16"
-}
+variable "vpc_cidr" {}
 
 variable "vpc_subnets_count" {
   default = 2
@@ -46,25 +40,15 @@ variable "instance_type" {
   default = "t3.micro"
 }
 
-variable "instance_app_count" {
-  default = 1
-}
+variable "instance_app_count" {}
 
-variable "db_name" {
-  default = "db_name"
-}
+variable "db_name" {}
 
-variable "db_user" {
-  default = "db_user"
-}
+variable "db_user" {}
 
-variable "db_password" {
-  default = "db_password"
-}
+variable "db_password" {}
 
-variable "db_instance" {
-  default = "db.t2.small"
-}
+variable "db_instance" {}
 
 variable "db_instance_count" {
   default = 1

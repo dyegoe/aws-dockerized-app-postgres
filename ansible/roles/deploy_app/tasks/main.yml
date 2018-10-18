@@ -1,0 +1,16 @@
+---
+- name: "Deploy container"
+  docker_container:
+    name: "{{ project_name }}"
+    image: "{{ registry_url }}:latest"
+    state: "started"
+    pull: yes
+    recreate: yes
+    ports:
+      - "5000:5000"
+    env:
+      NOTEJAM_SECRET_KEY: "{{ notejam_secret }}"
+      DB_USER: "{{ db_user }}"
+      DB_NAME: "{{ db_name }}"
+      DB_HOST: "{{ db_host | regex_replace(':.*$','') }}"
+      DB_PASSWORD: "{{ db_password }}"

@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  gather_facts: no
+  roles:
+    - gen_key_pair
+    - run_terraform

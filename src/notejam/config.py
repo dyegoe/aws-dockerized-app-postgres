@@ -26,3 +26,4 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+    SECRET_KEY = "RHIJ4ODJeleexpaczpa4LHEdvipYAKNm"

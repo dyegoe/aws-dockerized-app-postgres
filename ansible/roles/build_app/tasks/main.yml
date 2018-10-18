@@ -1,0 +1,25 @@
+---
+- name: "Get ECR credentials"
+  aws_ecr_login:
+    aws_access_key: "{{ aws_access_key_id }}"
+    aws_secret_key: "{{ aws_secret_access_key }}"
+    region: "{{ aws_region }}"
+  register: ecr_credentials
+  delegate_to: localhost
+
+- name: "Docker login to ECR"
+  docker_login:
+    registry: "{{ ecr_credentials['meta']['endpoint'] }}"
+    username: "{{ ecr_credentials['meta']['username'] }}"
+    password: "{{ ecr_credentials['meta']['token'] }}"
+    reauthorize: yes
+  delegate_to: localhost
+
+- name: "Build and push app"
+  docker_image:
+    name: "{{ registry_url }}:latest"
+    state: present
+    path: "{{ playbook_dir | dirname }}/src/"
+    force: yes
+    push: yes
+  delegate_to: localhost
