@@ -48,7 +48,6 @@ runcmd:
   - service docker restart
   - curl -L https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker
   - $(aws ecr get-login --no-include-email)
-  - pip install --upgrade pip
   - pip install docker-py
 EOF
   vars {
