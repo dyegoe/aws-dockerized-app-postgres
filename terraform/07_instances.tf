@@ -47,8 +47,9 @@ runcmd:
   - chkconfig docker on
   - service docker restart
   - curl -L https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker
-  - $(aws ecr get-login --no-include-email)
+  - rpm -ivh http://rpmfind.net/linux/centos/7.5.1804/os/x86_64/Packages/bash-completion-2.1-6.el7.noarch.rpm
   - pip install docker-py
+  - $(aws ecr get-login --no-include-email)
 EOF
   vars {
     aws_config = "${base64encode("${data.template_file.aws_config.rendered}")}"
