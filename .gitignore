@@ -8,7 +8,7 @@ logs/
 # sensible files and directories
 ansible/group_vars/all.yml
 ansible/files/
-ansible/inventories/deploy_inventory.cfg
+ansible/inventories/deploy_inventory.conf
 
 # Local .terraform directories
 **/.terraform/*
