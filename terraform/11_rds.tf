@@ -13,7 +13,7 @@ resource "aws_db_instance" "main" {
   count = "${var.db_instance_count}"
   allocated_storage = 10
   apply_immediately = false
-  availability_zone = "${var.region}a"
+  availability_zone = "${var.aws_region}a"
   backup_retention_period = 5
   backup_window = "05:00-07:00"
   copy_tags_to_snapshot = true

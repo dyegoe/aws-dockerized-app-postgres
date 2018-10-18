@@ -17,7 +17,7 @@ region = $${aws_region}
 output = json
   EOF
   vars {
-    aws_region = "${var.region}"
+    aws_region = "${var.aws_region}"
   }
 }
 
@@ -64,7 +64,7 @@ data "template_cloudinit_config" "user_data" {
 
 resource "aws_instance" "app" {
   count = "${var.instance_app_count}"
-  ami = "${lookup(var.amis, var.region)}"
+  ami = "${lookup(var.amis, var.aws_region)}"
   instance_type = "${var.instance_type}"
   subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
   key_name = "${aws_key_pair.default.id}"

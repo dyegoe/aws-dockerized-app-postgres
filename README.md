@@ -33,7 +33,7 @@ Inside the `group_vars/` directory, you can find an example file. You must copy/
 ---
 aws_access_key_id: put-here-your-access-key
 aws_secret_access_key: put-here-your-secret-key
-region: us-east-1
+aws_region: us-east-1
 project_name: notejam
 vpc_cidr: 10.10.0.0/16
 vpc_subnets_count: 2
