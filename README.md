@@ -44,6 +44,7 @@ db_password: db_password
 db_name: db_name
 db_instance: db.t2.small
 db_instance_count: 1
+notejam_secret: you-can-put-anything-as-you-want
 ```
 
 ### Terraform binary
