@@ -18,6 +18,16 @@ resource "aws_lb" "main" {
   )}"
 }
 
+resource "aws_lb_listener" "main" {
+  load_balancer_arn = "${aws_lb.main.arn}"
+  port = "80"
+  protocol = "HTTP"
+  default_action {
+    type = "forward"
+    target_group_arn = "${aws_lb_target_group.main.arn}"
+  }
+}
+
 resource "aws_lb_target_group" "main" {
   name = "${var.project_name}-lb-tg-main"
   port = 5000
@@ -35,14 +45,11 @@ resource "aws_lb_target_group" "main" {
   )}"
 }
 
-resource "aws_lb_listener" "main" {
-  load_balancer_arn = "${aws_lb.main.arn}"
-  port = "80"
-  protocol = "HTTP"
-  default_action {
-    type = "forward"
-    target_group_arn = "${aws_lb_target_group.main.arn}"
-  }
+resource "aws_lb_target_group_attachment" "main" {
+  count = "${var.instance_app_count}"
+  target_group_arn = "${aws_lb_target_group.main.arn}"
+  target_id        = "${element(aws_instance.app.*.id, count.index)}"
+  port             = 5000
 }
 
 output "aws_lb_main_dns_name" {
