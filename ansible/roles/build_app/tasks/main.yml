@@ -17,7 +17,7 @@
 
 - name: "Build and push app"
   docker_image:
-    name: "{{ repository_url }}/{{ project_name }}:latest"
+    name: "{{ registry_url }}/{{ project_name }}:latest"
     state: present
     path: "{{ playbook_dir | dirname }}/src/"
     push: yes
