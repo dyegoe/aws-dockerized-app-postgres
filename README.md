@@ -4,12 +4,18 @@
 
 The application to deploy is a copy from [NodeJam in Flask](https://github.com/komarserjio/notejam/tree/master/flask) and its source code is under `src/`.
 
-It has some adjustments:
+It has some adjustments to work on this infrastructure:
 
-- Source code: edit `nodejam/config.py` to use environment vars and postgres database.
+- On source code:
+  - `nodejam/config.py` to use environment vars and postgres database.
+  - `runserver.py` include `db.create_all()` to create on docker launch.
+  - `nodejam/views.py` include `/health` route for load balancer.
+
 - Include a Dockerfile to test and build the image.
 
 ### Env vars
+
+These vars are needed to run the container.
 
 - NOTEJAM_SECRET_KEY
 - DB_USER
