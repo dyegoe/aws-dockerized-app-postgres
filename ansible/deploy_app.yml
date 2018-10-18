@@ -3,3 +3,4 @@
   gather_facts: yes
   roles:
     - build_app
+    - deploy_app
