@@ -20,5 +20,6 @@
     name: "{{ registry_url }}:latest"
     state: present
     path: "{{ playbook_dir | dirname }}/src/"
+    force: yes
     push: yes
   delegate_to: localhost

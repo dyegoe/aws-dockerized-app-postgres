@@ -4,6 +4,7 @@
     name: "{{ project_name }}"
     image: "{{ registry_url }}:latest"
     state: "started"
+    pull: yes
     recreate: yes
     ports:
       - "5000:5000"
