@@ -80,11 +80,17 @@ dyego@ubuntu:~/dyego-alexandre-eugenio$ source ~/python3-ansible/bin/activate
 
 ## Coverage
 
-### deploy_infra.yml
+### Ansible
+
+#### deploy_infra.yml
 
 - Create a pair of ssh keys.
 - Apply a terraform infrastructure
 - Create a inventory file `inventories/deploy_inventory.cfg` with the terraform outputs.
+
+#### destroy_infra.yml
+
+- Destroy a terraform infrastructure.
 
 ### Terraform
 
@@ -101,7 +107,3 @@ It creates the AWS infrastructure.
 - ECR
 - Application Load Balancer
 - DB Instance (RDS)
-
-### destroy_infra.yml
-
-- Destroy a terraform infrastructure.
