@@ -206,6 +206,10 @@ def forgot_password():
         return redirect(url_for('home'))
     return render_template('users/forgot_password.html', form=form)
 
+# add this view for health check
+@app.route('/health/')
+def health():
+    return "health", 200
 
 # context processors and filters
 @app.context_processor
