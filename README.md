@@ -56,19 +56,19 @@ You must have `terraform` in your computer. [Download it](https://www.terraform.
 dyego@ubuntu:~/dyego-alexandre-eugenio$ sudo apt install python-pip python-virtualenv
 dyego@ubuntu:~/dyego-alexandre-eugenio$ virtualenv -p /usr/bin/python3 ~/python3-ansible
 dyego@ubuntu:~/dyego-alexandre-eugenio$ source ~/python3-ansible/bin/activate
-(python3-ansible) dyego@ubuntu:~/dyego-alexandre-eugenio$ pip install ansible
+(python3-ansible) dyego@ubuntu:~/dyego-alexandre-eugenio$ pip install -r ansible/requirements.txt
 ```
 
 ### To run the playbook
 
 ```text
-(python3-ansible) dyego@dyego:~/dyego-alexandre-eugenio$ ansible-playbook -i inventories/inventory.conf deploy_infra.yml
+(python3-ansible) dyego@dyego:~/dyego-alexandre-eugenio/ansible/$ ansible-playbook -i inventories/inventory.conf deploy_infra.yml
 ```
 
 ### To destroy
 
 ```text
-(python3-ansible) dyego@dyego:~/dyego-alexandre-eugenio$ ansible-playbook -i inventories/inventory.conf destroy.yml
+(python3-ansible) dyego@dyego:~/dyego-alexandre-eugenio/ansible/$ ansible-playbook -i inventories/inventory.conf destroy_infra.yml
 ```
 
 ## Coverage
