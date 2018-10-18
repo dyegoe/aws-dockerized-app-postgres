@@ -33,6 +33,9 @@ resource "aws_lb_target_group" "main" {
   port = 5000
   protocol = "HTTP"
   vpc_id = "${aws_vpc.main.id}"
+  health_check {
+    path = "/health/"
+  }
   stickiness {
     type = "lb_cookie"
     enabled = true
