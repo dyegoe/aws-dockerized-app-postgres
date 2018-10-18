@@ -11,5 +11,5 @@
       NOTEJAM_SECRET_KEY: "{{ notejam_secret }}"
       DB_USER: "{{ db_user }}"
       DB_NAME: "{{ db_name }}"
-      DB_HOST: "{{ db_host }}"
+      DB_HOST: "{{ db_host | regex_replace(':.*$','') }}"
       DB_PASSWORD: "{{ db_password }}"
