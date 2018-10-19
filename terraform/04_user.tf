@@ -41,18 +41,9 @@ output "aws_iam_access_key_ecr_user_secret" {
   value = "${aws_iam_access_key.ecr_user.secret}"
 }
 
-resource "aws_iam_user" "ec2_profile" {
+resource "aws_iam_role_policy" "ec2_profile" {
   name = "ec2_profile"
-  path = "/system/"
-}
-
-resource "aws_iam_access_key" "ec2_profile" {
-  user = "${aws_iam_user.ec2_profile.id}"
-}
-
-resource "aws_iam_user_policy" "ec2_profile" {
-  name = "ec2_cloudwatch_policy"
-  user = "${aws_iam_user.ec2_profile.id}"
+  role = "${aws_iam_role.ec2_profile.id}"
 
   policy = <<EOF
 {
@@ -69,10 +60,22 @@ resource "aws_iam_user_policy" "ec2_profile" {
 EOF
 }
 
-output "aws_iam_access_key_ec2_cloudwatch_id" {
-  value = "${aws_iam_access_key.ec2_profile.id}"
-}
+resource "aws_iam_role" "ec2_profile" {
+  name = "ec2_profile"
 
-output "aws_iam_access_key_ec2_cloudwatch_secret" {
-  value = "${aws_iam_access_key.ec2_profile.secret}"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
 }

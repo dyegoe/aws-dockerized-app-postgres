@@ -71,7 +71,7 @@ resource "aws_instance" "app" {
   key_name = "${aws_key_pair.default.id}"
   vpc_security_group_ids = ["${aws_security_group.ssh.id}", "${aws_security_group.lb-ec2.id}"]
   user_data = "${data.template_cloudinit_config.user_data.rendered}"
-  iam_instance_profile = "${aws_iam_user.ec2_profile.arn}"
+  iam_instance_profile = "${aws_iam_role.ec2_profile.arn}"
   tags = "${merge(
     local.common_tags,
     map(
