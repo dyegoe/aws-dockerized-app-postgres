@@ -66,13 +66,13 @@ dyego@ubuntu:~/dyego-alexandre-eugenio$ source ~/python3-ansible/bin/activate
 (python3-ansible) dyego@ubuntu:~/dyego-alexandre-eugenio$ pip install -r ansible/requirements.txt
 ```
 
-### To run the playbook
+### To deploy infrastructure
 
 ```text
 (python3-ansible) dyego@dyego:~/dyego-alexandre-eugenio/ansible/$ ansible-playbook -i inventories/inventory.conf deploy_infra.yml
 ```
 
-### To destroy
+### To destroy infrastructure
 
 ```text
 (python3-ansible) dyego@dyego:~/dyego-alexandre-eugenio/ansible/$ ansible-playbook -i inventories/inventory.conf destroy_infra.yml
