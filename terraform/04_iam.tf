@@ -54,6 +54,7 @@ resource "aws_iam_role_policy" "ec2_profile" {
             "Effect": "Allow",
             "Action": [
                 "logs:CreateLogGroup",
+                "logs:CreateLogStream",
                 "logs:PutLogEvents"
             ],
             "Resource": "*"
