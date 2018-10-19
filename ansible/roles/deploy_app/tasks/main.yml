@@ -6,6 +6,9 @@
     state: "started"
     pull: yes
     recreate: yes
+    log_driver: awslogs
+    log_options:
+      awslogs-group: "{{ project_name}}-docker-app-logs"
     ports:
       - "5000:5000"
     env:

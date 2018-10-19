@@ -5,8 +5,8 @@ aws_access_key_id = $${aws_access_key_id}
 aws_secret_access_key = $${aws_secret_access_key}
   EOF
   vars {
-    aws_access_key_id = "${aws_iam_access_key.asg_user.id}"
-    aws_secret_access_key = "${aws_iam_access_key.asg_user.secret}"
+    aws_access_key_id = "${aws_iam_access_key.ecr_user.id}"
+    aws_secret_access_key = "${aws_iam_access_key.ecr_user.secret}"
   }
 }
 
@@ -63,6 +63,11 @@ data "template_cloudinit_config" "user_data" {
   }
 }
 
+resource "aws_iam_instance_profile" "ec2_profile" {
+  name = "ec2_profile"
+  role = "${aws_iam_role.ec2_profile.name}"
+}
+
 resource "aws_instance" "app" {
   count = "${var.instance_app_count}"
   ami = "${lookup(var.amis, var.aws_region)}"
@@ -71,6 +76,7 @@ resource "aws_instance" "app" {
   key_name = "${aws_key_pair.default.id}"
   vpc_security_group_ids = ["${aws_security_group.ssh.id}", "${aws_security_group.lb-ec2.id}"]
   user_data = "${data.template_cloudinit_config.user_data.rendered}"
+  iam_instance_profile = "${aws_iam_instance_profile.ec2_profile.name}"
   tags = "${merge(
     local.common_tags,
     map(
