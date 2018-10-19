@@ -52,7 +52,10 @@ resource "aws_iam_role_policy" "ec2_profile" {
         {
             "Sid": "VisualEditor0",
             "Effect": "Allow",
-            "Action": "logs:*",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:PutLogEvents"
+            ],
             "Resource": "*"
         }
     ]
