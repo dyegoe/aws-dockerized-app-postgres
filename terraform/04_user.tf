@@ -1,15 +1,15 @@
-resource "aws_iam_user" "asg_user" {
-  name = "asg_user"
+resource "aws_iam_user" "ecr_user" {
+  name = "ecr_user"
   path = "/system/"
 }
 
-resource "aws_iam_access_key" "asg_user" {
-  user = "${aws_iam_user.asg_user.id}"
+resource "aws_iam_access_key" "ecr_user" {
+  user = "${aws_iam_user.ecr_user.id}"
 }
 
-resource "aws_iam_user_policy" "asg_user" {
-  name = "asg_user_policy"
-  user = "${aws_iam_user.asg_user.id}"
+resource "aws_iam_user_policy" "ecr_user" {
+  name = "ecr_user_policy"
+  user = "${aws_iam_user.ecr_user.id}"
 
   policy = <<EOF
 {
@@ -33,10 +33,10 @@ resource "aws_iam_user_policy" "asg_user" {
 EOF
 }
 
-output "aws_iam_access_key_asg_user_id" {
-  value = "${aws_iam_access_key.asg_user.id}"
+output "aws_iam_access_key_ecr_user_id" {
+  value = "${aws_iam_access_key.ecr_user.id}"
 }
 
-output "aws_iam_access_key_asg_user_secret" {
-  value = "${aws_iam_access_key.asg_user.secret}"
+output "aws_iam_access_key_ecr_user_secret" {
+  value = "${aws_iam_access_key.ecr_user.secret}"
 }
